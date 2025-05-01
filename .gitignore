@@ -1,12 +1,6 @@
 boot-*.img
-uefi-*.img
-uefi-*.img-dtb
-uefi-*.img.gz
-uefi-*.img.gz-dtb
 workspace
 *.dll
-ramdisk
-sdm845Pkg/Drivers/LogoDxe/Logo.bmp
 .cache
 .vscode
 *.dts
