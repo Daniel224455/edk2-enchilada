@@ -11,12 +11,12 @@ export WORKSPACE=$PWD/workspace
 
 # not actually GCC5; it's GCC7 on Ubuntu 18.04.
 # anyways, start the build
-GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -b RELEASE -p sdm845Pkg/Devices/enchilada.dsc
+GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -b RELEASE -p Sdm845Pkg/Devices/enchilada.dsc
 
 # post-build packing
-cat ./BootShim/BootShim.bin "workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd" > "workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim"||exit 1
-gzip -c < "workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim" > "workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim.gz"||exit 1
-cat "workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim.gz" ./ImageResources/enchilada.dtb > ./ImageResources/bootpayload.bin||exit 1
+cat ./BootShim/BootShim.bin "workspace/Build/Sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd" > "workspace/Build/Sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim"||exit 1
+gzip -c < "workspace/Build/Sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim" > "workspace/Build/Sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim.gz"||exit 1
+cat "workspace/Build/Sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd-bootshim.gz" ./ImageResources/enchilada.dtb > ./ImageResources/bootpayload.bin||exit 1
 
 # create bootable android boot.img
 python3 ./ImageResources/mkbootimg.py \
