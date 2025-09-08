@@ -1,6 +1,6 @@
 #!/bin/bash
 # based on the instructions from edk2-platforms
-rm -rf boot-enchilada.img
+rm -rf boot-*.img
 set -e
 export PACKAGES_PATH=$PWD/edk2:$PWD/edk2-platforms:$PWD
 export WORKSPACE=$PWD/workspace

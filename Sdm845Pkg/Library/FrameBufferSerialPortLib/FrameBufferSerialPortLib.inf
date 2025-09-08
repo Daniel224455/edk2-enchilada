@@ -16,11 +16,13 @@
 
 [LibraryClasses]
   ArmLib
+  BaseMemoryLib
   PcdLib
   IoLib
   HobLib
   CompilerIntrinsicsLib
   CacheMaintenanceLib
+  TimerLib
 
 [Pcd]
   gSdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress

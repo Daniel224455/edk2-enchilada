@@ -1,9 +1,11 @@
 #include <PiDxe.h>
 
 #include <Library/ArmLib.h>
+#include <Library/BaseMemoryLib.h>
 #include <Library/CacheMaintenanceLib.h>
 #include <Library/HobLib.h>
 #include <Library/SerialPortLib.h>
+#include <Library/TimerLib.h>
 
 #include <Resources/FbColor.h>
 #include <Resources/font5x12.h>
@@ -19,6 +21,8 @@ UINTN gWidth = FixedPcdGet32(PcdMipiFrameBufferWidth);
 // Reserve half screen for output
 UINTN gHeight = FixedPcdGet32(PcdMipiFrameBufferHeight);
 UINTN gBpp    = FixedPcdGet32(PcdMipiFrameBufferPixelBpp);
+UINTN gFrameBufferMemRegion = FixedPcdGet32(PcdMipiFrameBufferAddress);
+UINTN delay   = 50000;
 
 // Module-used internal routine
 void FbConPutCharWithFactor(char c, int type, unsigned scale_factor);
@@ -124,7 +128,7 @@ paint:
   BOOLEAN intstate = ArmGetInterruptState();
   ArmDisableInterrupts();
 
-  Pixels = (void *)FixedPcdGet32(PcdMipiFrameBufferAddress);
+  Pixels = (void *)gFrameBufferMemRegion;
   Pixels += m_Position.y * ((gBpp / 8) * FONT_HEIGHT * gWidth);
   Pixels += m_Position.x * scale_factor * ((gBpp / 8) * (FONT_WIDTH + 1));
 
@@ -141,10 +145,11 @@ paint:
   return;
 
 newline:
+  MicroSecondDelay( delay );
   m_Position.y += scale_factor;
   m_Position.x = 0;
   if (m_Position.y >= m_MaxPosition.y - scale_factor) {
-    ResetFb();
+    ZeroMem ((VOID *)gFrameBufferMemRegion, 4 * gWidth * gHeight);
     FbConFlush();
     m_Position.y = 0;
 
@@ -153,6 +158,9 @@ newline:
     goto paint;
   }
   else {
+    Pixels = (void *)gFrameBufferMemRegion;
+    Pixels += m_Position.y * ((gBpp / 8) * FONT_HEIGHT * gWidth);
+    ZeroMem(Pixels, ((gBpp / 8) * FONT_HEIGHT * gWidth) * scale_factor);   
     FbConFlush();
     if (intstate)
       ArmEnableInterrupts();

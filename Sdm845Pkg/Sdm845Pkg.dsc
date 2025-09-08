@@ -28,7 +28,7 @@
 
 [LibraryClasses.common]
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
-  ArmPlatformLib|Sdm845Pkg/Library/Sdm845Lib/Sdm845Lib.inf
+  ArmPlatformLib|Sdm845Pkg/Library/QcPlatLib/QcPlatLib.inf
   CompilerIntrinsicsLib|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
@@ -141,6 +141,19 @@
   gEmbeddedTokenSpaceGuid.PcdMetronomeTickPeriod|1000
 
   #
+  # Debug
+  #
+  gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x00
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0x2f
+!if $(TARGET) == DEBUG
+  gEfiMdePkgTokenSpaceGuid.PcdDebugClearMemoryValue|0xAF
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x800fee0f
+!else
+  gEfiMdePkgTokenSpaceGuid.PcdDebugClearMemoryValue|0x00
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x00000000
+!endif
+
+  #
   #
   # Fastboot
   #
@@ -151,8 +164,6 @@
   # Make VariableRuntimeDxe work at emulated non-volatile variable mode.
   #
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
-
-  gSdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiExposedTableVersions|0x20
 
@@ -186,9 +197,6 @@
     <LibraryClasses>
       NULL|SecurityPkg/Library/DxeImageVerificationLib/DxeImageVerificationLib.inf
   }
-  SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
-  SecurityPkg/EnrollFromDefaultKeysApp/EnrollFromDefaultKeysApp.inf
-  SecurityPkg/VariableAuthenticated/SecureBootDefaultKeysDxe/SecureBootDefaultKeysDxe.inf
 
   MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
   EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf

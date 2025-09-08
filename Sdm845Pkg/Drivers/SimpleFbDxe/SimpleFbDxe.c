@@ -142,11 +142,8 @@ DisplayBlt(
       DestinationX, DestinationY, Width, Height, Delta);
   gBS->RestoreTPL(Tpl);
 
-  // zhuowei: hack: flush the cache manually since my memory maps are still
-  // broken
   WriteBackInvalidateDataCacheRange(
       (void *)mDisplay.Mode->FrameBufferBase, mDisplay.Mode->FrameBufferSize);
-  // zhuowei: end hack
 
   return RETURN_ERROR(Status) ? EFI_INVALID_PARAMETER : EFI_SUCCESS;
 }
@@ -235,14 +232,9 @@ SimpleFbDxeInitialize(
   }
   ASSERT_EFI_ERROR(Status);
 
-  // zhuowei: clear the screen to black
-  // UEFI standard requires this, since text is white - see
-  // OvmfPkg/QemuVideoDxe/Gop.c
   ZeroMem((void *)FrameBufferAddress, FrameBufferSize);
-  // hack: clear cache
   WriteBackInvalidateDataCacheRange(
       (void *)FrameBufferAddress, FrameBufferSize);
-  // zhuowei: end
 
   /* Register handle */
   Status = gBS->InstallMultipleProtocolInterfaces(

@@ -19,7 +19,7 @@
 
 #include <Ppi/ArmMpCoreInfo.h>
 
-ARM_CORE_INFO mSdm845InfoTable[] = {
+ARM_CORE_INFO mQcPlatInfoTable[] = {
   {
     // Cluster 0, Core 0
     0x0, 0x0,
@@ -116,8 +116,8 @@ PrePeiCoreGetMpCoreInfo (
   )
 {
   // Only support one cluster
-  *CoreCount    = sizeof(mSdm845InfoTable) / sizeof(ARM_CORE_INFO);
-  *ArmCoreTable = mSdm845InfoTable;
+  *CoreCount    = sizeof(mQcPlatInfoTable) / sizeof(ARM_CORE_INFO);
+  *ArmCoreTable = mQcPlatInfoTable;
   return EFI_SUCCESS;
 }
 

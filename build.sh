@@ -22,9 +22,9 @@ cat "workspace/Build/Sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd-bootshim.gz" ./Im
 python3 ./ImageResources/mkbootimg.py \
   --kernel ./ImageResources/bootpayload.bin \
   --ramdisk ./ImageResources/ramdisk \
-  --kernel_offset 0x00008000 \
-  --ramdisk_offset 0x00008000 \
-  --tags_offset 0x00008000 \
+  --kernel_offset 0x00000000 \
+  --ramdisk_offset 0x00000000 \
+  --tags_offset 0x00000000 \
   --os_version 13.0.0 \
   --os_patch_level "2025-05" \
   --header_version 1 \

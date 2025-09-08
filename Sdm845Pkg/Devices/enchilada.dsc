@@ -18,6 +18,7 @@
   # Simple FrameBuffer
   gSdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gSdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
+  gSdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000
 
   # SmBios Information
   gSdm845PkgTokenSpaceGuid.PcdDeviceVendor|"OnePlus"
