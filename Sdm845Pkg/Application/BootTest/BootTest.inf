@@ -1,0 +1,20 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootTest
+  FILE_GUID                      = 753FB3EE-9B6E-4597-A15D-F10C8516AC4B
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = BootEntry
+
+[Sources]
+  BootTest.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  Sdm845Pkg/Sdm845Pkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  DebugLib
+  PrintLib
+  UefiLib

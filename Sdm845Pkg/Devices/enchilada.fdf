@@ -537,6 +537,8 @@ APRIORI DXE {
   INF Sdm845Pkg/Drivers/PlatformSmbiosDxe/PlatformSmbiosDxe.inf
   INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
+  INF Sdm845Pkg/Application/BootTest/BootTest.inf
+
   #
   # UEFI applications
   #

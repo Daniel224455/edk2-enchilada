@@ -312,7 +312,7 @@
       PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   }
   Sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
-
+  Sdm845Pkg/Application/BootTest/BootTest.inf
   ShellPkg/Application/Shell/Shell.inf {
     <LibraryClasses>
       ShellCommandLib|ShellPkg/Library/UefiShellCommandLib/UefiShellCommandLib.inf

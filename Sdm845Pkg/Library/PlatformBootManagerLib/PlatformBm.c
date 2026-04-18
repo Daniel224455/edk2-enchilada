@@ -657,8 +657,11 @@ VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
   //
   // Register UEFI Shell
   //
+  //PlatformRegisterFvBootOption(
+  //    &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE);
+
   PlatformRegisterFvBootOption(
-      &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE);
+      &gBootTestFileGuid, L"BootTest", LOAD_OPTION_ACTIVE);
 }
 
 /**
@@ -672,7 +675,7 @@ VOID EFIAPI PlatformBootManagerWaitCallback(UINT16 TimeoutRemain)
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL_UNION Black;
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL_UNION White;
   UINT16                              Timeout;
-  EFI_STATUS                          Status;
+  //EFI_STATUS                          Status;
 
   Timeout = PcdGet16(PcdPlatformBootTimeOut);
 
@@ -685,13 +688,13 @@ VOID EFIAPI PlatformBootManagerWaitCallback(UINT16 TimeoutRemain)
   Black.Raw = 0x00000000;
   White.Raw = 0x00FFFFFF;
 
-  Status = BootLogoUpdateProgress(
+  /*Status = BootLogoUpdateProgress(
       White.Pixel, Black.Pixel,
       L"Press any side button for Boot Options",
       White.Pixel, (Timeout - TimeoutRemain) * 100 / Timeout, 0);
   if (EFI_ERROR(Status)) {
     Print(L".");
-  }
+  }*/
 }
 
 /**
