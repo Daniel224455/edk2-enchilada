@@ -52,6 +52,8 @@ GetPlatformPpi (
   return EFI_NOT_FOUND;
 }
 
+extern EFI_GUID  gFdtHobGuid;
+
 VOID
 PrePiMain (
   IN  UINTN   UefiMemoryBase,
@@ -106,6 +108,25 @@ PrePiMain (
               (VOID *)StacksBase // The top of the UEFI Memory is reserved for the stacks
               );
   PrePeiSetHobList (HobList);
+
+  if (DtbAddress != 0) {
+    UINT64 DtbAddrCopy = (UINT64)DtbAddress;
+  
+    // validate magic before cpy
+    if (*(UINT32 *)DtbAddress == SwapBytes32 (0xD00DFEED)) {
+      UINT32 DtbSize = SwapBytes32 (*(UINT32 *)(DtbAddress + 4));
+  
+      // copy dtb into hob mem
+      VOID *DtbCopy = AllocatePages (EFI_SIZE_TO_PAGES (DtbSize));
+      if (DtbCopy != NULL) {
+        CopyMem (DtbCopy, (VOID *)DtbAddress, DtbSize);
+        BuildGuidDataHob (&gFdtHobGuid, &DtbCopy, sizeof (VOID *));
+        DEBUG ((EFI_D_ERROR, "DTB HOB installed at 0x%p, size 0x%x\n", DtbCopy, DtbSize));
+      }
+    } else {
+      DEBUG ((EFI_D_ERROR, "DTB magic invalid, skipping HOB install\n"));
+    }
+  }
 
   // Initialize MMU and Memory HOBs (Resource Descriptor HOBs)
   Status = MemoryPeim (UefiMemoryBase, FixedPcdGet32 (PcdSystemMemoryUefiRegionSize));

@@ -62,6 +62,7 @@
 [Guids]
   gArmMpCoreInfoGuid
   gEfiFirmwarePerformanceGuid
+  gFdtHobGuid
 
 [FeaturePcd]
   gEmbeddedTokenSpaceGuid.PcdPrePiProduceMemoryTypeInformationHob

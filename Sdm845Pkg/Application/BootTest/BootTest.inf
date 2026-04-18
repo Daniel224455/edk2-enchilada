@@ -12,9 +12,14 @@
 [Packages]
   MdePkg/MdePkg.dec
   Sdm845Pkg/Sdm845Pkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
 
 [LibraryClasses]
   UefiApplicationEntryPoint
   DebugLib
   PrintLib
   UefiLib
+  HobLib
+
+[Guids] 
+  gFdtHobGuid 
