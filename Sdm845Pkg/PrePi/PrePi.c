@@ -94,6 +94,7 @@ PrePiMain (
                 );
   SerialPortWrite ((UINT8 *)Buffer, CharCount);
 
+  MmioWrite32 (0x17980000 + 0x8, 0x0);
   DEBUG((EFI_D_ERROR, "DTB Addr from x0: 0x%08x\n", DtbAddress));
 
   // Initialize the Debug Agent for Source Level Debugging
