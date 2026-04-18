@@ -56,7 +56,8 @@ VOID
 PrePiMain (
   IN  UINTN   UefiMemoryBase,
   IN  UINTN   StacksBase,
-  IN  UINT64  StartTimeStamp
+  IN  UINT64  StartTimeStamp,
+  IN  UINTN   DtbAddress
   )
 {
   EFI_HOB_HANDOFF_INFO_TABLE  *HobList;
@@ -91,8 +92,7 @@ PrePiMain (
                 );
   SerialPortWrite ((UINT8 *)Buffer, CharCount);
 
-  DEBUG((EFI_D_ERROR, "Test\n"));
-  while (TRUE);
+  DEBUG((EFI_D_ERROR, "DTB Addr from x0: 0x%08x\n", DtbAddress));
 
   // Initialize the Debug Agent for Source Level Debugging
   InitializeDebugAgent (DEBUG_AGENT_INIT_POSTMEM_SEC, NULL, NULL);
@@ -172,7 +172,8 @@ VOID
 CEntryPoint (
   IN  UINTN  MpId,
   IN  UINTN  UefiMemoryBase,
-  IN  UINTN  StacksBase
+  IN  UINTN  StacksBase,
+  IN  UINTN  DtbAddress
   )
 {
   UINT64  StartTimeStamp;
@@ -217,7 +218,7 @@ CEntryPoint (
       );
 
     // Goto primary Main.
-    PrimaryMain (UefiMemoryBase, StacksBase, StartTimeStamp);
+    PrimaryMain (UefiMemoryBase, StacksBase, StartTimeStamp, DtbAddress);
   } else {
     SecondaryMain (MpId);
   }

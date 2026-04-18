@@ -33,7 +33,8 @@ VOID
 PrePiMain (
   IN  UINTN   UefiMemoryBase,
   IN  UINTN   StacksBase,
-  IN  UINT64  StartTimeStamp
+  IN  UINT64  StartTimeStamp,
+  IN  UINTN   DtbAddress
   );
 
 EFI_STATUS
@@ -53,7 +54,8 @@ VOID
 PrimaryMain (
   IN  UINTN   UefiMemoryBase,
   IN  UINTN   StacksBase,
-  IN  UINT64  StartTimeStamp
+  IN  UINT64  StartTimeStamp,
+  IN  UINTN   DtbAddress
   );
 
 VOID

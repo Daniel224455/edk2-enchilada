@@ -34,6 +34,8 @@ _StackSize:
 	.long 0
 
 _Start:
+    mov     x7, x0 /* preserve abl pass */
+
 	mov		x4, x1
 	ldr		x5, _StackBase
 	cmp		x4, x5
@@ -48,6 +50,7 @@ _CopyLoop:
 	ldr		x5, _StackBase
 
 _Entry:
+    mov     x0, x7 /* pass to mep */
 	br		x5
 
 _Dead:

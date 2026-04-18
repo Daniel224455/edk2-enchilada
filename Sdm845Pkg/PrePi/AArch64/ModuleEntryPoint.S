@@ -8,6 +8,9 @@
 #include <AsmMacroIoLibV8.h>
 
 ASM_FUNC(_ModuleEntryPoint)
+  // move 0 reg to 28 reg
+  mov x28, x0
+
   // Do early platform specific actions
   bl    ASM_PFX(ArmPlatformPeiBootAction)
 
@@ -106,10 +109,13 @@ _PrepareArguments:
   // Set the frame pointer to NULL so any backtraces terminate here
   mov   x29, xzr
 
+  mov x3, x28
+
   // Jump to PrePiCore C code
   //    x0 = MpId
   //    x1 = UefiMemoryBase
   //    x2 = StacksBase
+  //    x3 = dtb address from abl
   blr   x4
 
 _NeverReturn:
