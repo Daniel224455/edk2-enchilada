@@ -40,7 +40,7 @@
   FileExplorerLib|MdeModulePkg/Library/FileExplorerLib/FileExplorerLib.inf
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
   BootLogoLib|MdeModulePkg/Library/BootLogoLib/BootLogoLib.inf
-  SerialPortLib|Sdm845Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
+  SerialPortLib|Sdm845Pkg/Library/GeniSerialPortLib/GeniSerialPortLib.inf
   RealTimeClockLib|EmbeddedPkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
   TimeBaseLib|EmbeddedPkg/Library/TimeBaseLib/TimeBaseLib.inf
 
@@ -176,7 +176,7 @@
   #
   # PEI Phase modules
   #
-  ArmPlatformPkg/PrePi/PeiUniCore.inf
+  Sdm845Pkg/PrePi/PeiUniCore.inf
 
   #
   # DXE
